@@ -1,0 +1,28 @@
+services:
+  api:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "7181:80"
+    depends_on:
+      feddb:
+        condition: service_healthy
+  feddb:
+    image: mcr.microsoft.com/mssql/server
+    user: root
+    volumes:
+      - fed-assignment2:/var/opt/mssql/data
+    environment:
+      MSSQL_SA_PASSWORD: "YourStrong@Passw0rd"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "4433:1433"
+    healthcheck:
+      test: [ "CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -U sa -P YourStrong@Passw0rd -Q 'SELECT 1'" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+volumes:
+  fed-assignment2:
+    name: fed-assignment2-db
