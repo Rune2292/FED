@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useAuthStore } from '@/state/authStore';  // Adjust path as necessary
+import { useAuthStore } from '@/state/authStore'; 
 
 import { CardTitle, CardDescription, CardHeader, CardContent, Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -24,7 +24,6 @@ export default function Login() {
       setToken(response.data.JWT);  // Store token in Zustand store
     } catch (error) {
       console.error("Login error: ", error);
-      // Implement more robust error handling
     }
   };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginPage from './components/pages/LoginPage';  // Ensure correct path
+import LoginPage from './components/pages/LoginPage';
 
 import './App.css';
 
