@@ -1,7 +1,7 @@
-import React from "react";
-import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useAuthStore } from '@/state/authStore'; 
+import { useForm } from "react-hook-form";
+import { useAuthStore } from '@/state/authStore';
+import { useNavigate } from 'react-router-dom';
 
 import { CardTitle, CardDescription, CardHeader, CardContent, Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -16,12 +16,14 @@ type LoginFormInputs = {
 export default function Login() {
   const { register, handleSubmit, formState: { errors }} = useForm<LoginFormInputs>();
   const setToken = useAuthStore(state => state.setToken);
+  const navigate = useNavigate(); 
 
   const onSubmit = async (data: LoginFormInputs) => {
     try {
       const response = await axios.post("http://localhost:7181/api/account/login", data);
       console.log("Token received: ", response.data.JWT);
-      setToken(response.data.JWT);  // Store token in Zustand store
+      setToken(response.data.JWT);
+      navigate('/dashboard');
     } catch (error) {
       console.error("Login error: ", error);
     }
@@ -38,7 +40,7 @@ export default function Login() {
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" {...register("email", { required: true })} placeholder="ViErSeje@example.com" required type="email" />
+              <Input id="email" {...register("email", { required: true })} placeholder="Email" required type="email" />
               {errors.email && <p className="text-red-500 text-xs">Email is required</p>}
             </div>
             <div className="space-y-2">

@@ -1,4 +1,3 @@
-import React from "react";
 import Login from "../stuff/login";
 
 export default function LoginPage() {
