@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
+import { useAuthStore } from "@/state/authStore";
 
 type CreateAccountFormInputs = {
   FirstName: string;
@@ -43,12 +44,23 @@ export default function CreateAccount() {
       });
       return;
     }
-    data.IsManager = isManager;
+    if (isManager) {
+      const response = await axios.post(
+        "http://localhost:7181/api/managers",
+        data
+      );
+      console.log(response);
+      console.log("Creating manager account...");
+    }
+    if (!isManager) {
     const response = await axios.post(
-      "http://localhost:7181/api/account/create",
+      "http://localhost:7181/api/models",
       data
     );
-    console.log("Creating account...");
+    console.log(response);
+    console.log("Creating model account...");
+  }
+
   };
 
   return (
