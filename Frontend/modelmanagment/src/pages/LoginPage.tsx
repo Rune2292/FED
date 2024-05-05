@@ -1,4 +1,4 @@
-import Login from "../stuff/login";
+import Login from "../components/stuff/login";
 
 export default function LoginPage() {
     return (

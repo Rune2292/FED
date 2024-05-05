@@ -1,5 +1,5 @@
-import CreateAccount from "../stuff/createAccount";
-import { BackToDashboard } from "../stuff/backToDashboard";
+import CreateAccount from "../components/stuff/createAccount";
+import { BackToDashboard } from "../components/stuff/backToDashboard";
 
 export default function Account() {  
     return (

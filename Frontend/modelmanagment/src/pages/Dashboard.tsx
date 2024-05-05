@@ -1,5 +1,5 @@
-import { Welcome } from "../ui/welcome";
-import { ManagerMenu } from "../ui/managerMenu";
+import { Welcome } from "../components/ui/welcome";
+import { ManagerMenu } from "../components/ui/managerMenu";
 
 
 
