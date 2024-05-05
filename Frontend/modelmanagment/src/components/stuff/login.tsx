@@ -21,8 +21,8 @@ export default function Login() {
   const onSubmit = async (data: LoginFormInputs) => {
     try {
       const response = await axios.post("http://localhost:7181/api/account/login", data);
-      console.log("Token received: ", response.data.JWT);
-      setToken(response.data.JWT);
+      console.log("Token received: ", response.data.jwt);
+      setToken(response.data.jwt);
       navigate('/dashboard');
     } catch (error) {
       console.error("Login error: ", error);
