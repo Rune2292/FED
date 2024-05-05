@@ -5,7 +5,7 @@ export const ManagerMenu = () => {
   const navigate = useNavigate();
   return (
     <div className="flex flex-col space-y-4">
-      <Button onClick={() => navigate("/create-eaccount")}>
+      <Button onClick={() => navigate("/create-account")}>
         Create new account
       </Button>
       <Button onClick={() => navigate("/add-job")}>

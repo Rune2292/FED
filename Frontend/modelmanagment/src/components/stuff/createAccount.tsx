@@ -44,7 +44,9 @@ export default function CreateAccount() {
     >
       <Card>
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Create Account</CardTitle>
+          <CardTitle 
+          className="text-2xl font-bold">Create Account  
+          </CardTitle> 
           <CardDescription>
             Enter your email, password, and account type to create a new account
           </CardDescription>
@@ -52,7 +54,8 @@ export default function CreateAccount() {
         <CardContent>
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">Email<span className="text-red-500">*</span>
+              </Label>
               <Input
                 id="email"
                 {...register("email", { required: true })}
@@ -65,7 +68,7 @@ export default function CreateAccount() {
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Password<span className="text-red-500">*</span></Label>
               <Input
                 id="password"
                 {...register("password", { required: true })}
@@ -76,7 +79,7 @@ export default function CreateAccount() {
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="repeatPassword">Repeat Password</Label>
+              <Label htmlFor="repeatPassword">Repeat Password<span className="text-red-500">*</span></Label>
               <Input
                 id="repeatPassword"
                 {...register("repeatPassword", { required: true })}
@@ -87,7 +90,7 @@ export default function CreateAccount() {
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="role">Role</Label>
+              <Label htmlFor="role">Role<span className="text-red-500">*</span></Label>
               <Select
                 id="role"
                 {...register("role", { required: true })}
