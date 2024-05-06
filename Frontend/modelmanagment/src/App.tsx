@@ -1,10 +1,17 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
-import Dashboard from './pages/Dashboard';
-import CreateAccount from './pages/Account';
+/** @format */
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import Dashboard from "./pages/Dashboard";
+import CreateAccount from "./pages/Account";
 
 import "./api/axiosConfig";
-import './App.css';
+import "./App.css";
 
 function App() {
   return (

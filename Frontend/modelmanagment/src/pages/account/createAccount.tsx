@@ -1,3 +1,5 @@
+/** @format */
+
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import {
@@ -11,7 +13,6 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
-import { useAuthStore } from "@/state/authStore";
 
 type CreateAccountFormInputs = {
   FirstName: string;
@@ -53,14 +54,13 @@ export default function CreateAccount() {
       console.log("Creating manager account...");
     }
     if (!isManager) {
-    const response = await axios.post(
-      "http://localhost:7181/api/models",
-      data
-    );
-    console.log(response);
-    console.log("Creating model account...");
-  }
-
+      const response = await axios.post(
+        "http://localhost:7181/api/models",
+        data
+      );
+      console.log(response);
+      console.log("Creating model account...");
+    }
   };
 
   return (
