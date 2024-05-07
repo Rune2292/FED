@@ -129,8 +129,8 @@ namespace ModelsApi.Controllers
         /// </summary>
         /// <param name="newExpense"></param>
         /// <returns>Created at and the new expense</returns>
-        [ProducesResponseType(201, Type = typeof(EfExpense))] 
-        [ProducesResponseType(400)] 
+        [ProducesResponseType(201, Type = typeof(EfExpense))]
+        [ProducesResponseType(400)]
         [HttpPost]
         public async Task<ActionResult<EfExpense>> PostExpense(NewExpense newExpense)
         {

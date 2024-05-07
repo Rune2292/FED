@@ -1,7 +1,7 @@
 /** @format */
 
 import { useNavigate } from "react-router-dom";
-import IconReturnUpBackOutline from "@/components/returnArrow";
+import IconReturnUpBackOutline from "@/components/ReturnArrow";
 import { Button } from "@/components/ui/button";
 
 interface BackToDashboardProps {

@@ -15,6 +15,7 @@ export const Welcome = () => {
       const decoded = JSON.parse(atob(token.split('.')[1]));
       console.log(decoded);
       setEmail(decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress']);
+      
     }
   }, [token]);
 

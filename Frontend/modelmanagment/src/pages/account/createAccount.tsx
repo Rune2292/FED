@@ -13,6 +13,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
+import { useToast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
 
 type CreateAccountFormInputs = {
   FirstName: string;
@@ -25,6 +27,8 @@ type CreateAccountFormInputs = {
   IsManager: boolean;
 };
 
+
+
 export default function CreateAccount() {
   const {
     register,
@@ -34,8 +38,12 @@ export default function CreateAccount() {
     watch,
   } = useForm<CreateAccountFormInputs>();
 
+  const navigate = useNavigate();
+
   const role = watch("role");
   const isManager = role === "manager";
+  
+  const {toast} = useToast();
 
   const handleCreateAccount = async (data: CreateAccountFormInputs) => {
     if (data.Password !== data.RepeatPassword) {
@@ -61,6 +69,15 @@ export default function CreateAccount() {
       console.log(response);
       console.log("Creating model account...");
     }
+
+    toast({
+      title: "Account Created",
+      description: "Account has been created successfully",
+      variant: "default",
+      duration: 5000,
+    });
+    navigate("/dashboard");
+    
   };
 
   return (
