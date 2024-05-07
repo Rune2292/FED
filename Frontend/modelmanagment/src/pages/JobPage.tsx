@@ -10,10 +10,13 @@ import { Job } from "@/types/job";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { BackToDashboard } from "./account/backToDashboard";
+import { Model } from "@/types/model";
+import { EfModel } from "@/types/efModel";
 
 export default function JobPage() {
   const urlParams = useParams();
 
+  const [refreshKey, setRefreshKey] = useState(0);
   const [job, setJob] = useState<Job>();
   useEffect(() => {
     axios
@@ -21,7 +24,7 @@ export default function JobPage() {
       .then((response) => {
         setJob(response.data);
       });
-  }, [setJob, urlParams.jobId]);
+  }, [setJob, urlParams.jobId, refreshKey]);
 
   if (!job) {
     return <div>Loading...</div>;
@@ -33,6 +36,57 @@ export default function JobPage() {
   );
 
   console.log(job.models);
+
+  async function handleRemoveModel(model: Model) {
+    if (job?.jobId != null) {
+      console.log("TRyiNG TO DELETe");
+      console.log(model);
+
+      const allModels = await axios.get<EfModel[]>(
+        "http://localhost:7181/api/models"
+      );
+
+      const allModelsData = allModels.data;
+      const modelToBeRemoved = allModelsData.find(
+        (m) => m.firstName === model.firstName
+      );
+      if (!modelToBeRemoved) {
+        console.log("Model not found");
+        return;
+      }
+      console.log("Model to be removed");
+      console.log(modelToBeRemoved?.efModelId);
+
+      const response = await axios.delete(
+        `http://localhost:7181/api/jobs/${job.jobId}/model/${modelToBeRemoved.efModelId}`
+      );
+
+      if (response.status === 400) {
+        console.log("Error deleting model");
+        return;
+      }
+
+      setRefreshKey((prev) => prev + 1);
+    }
+  }
+
+  async function handleAddModel(modelId: number) {
+    if (job?.jobId != null) {
+      console.log("Trying to add model");
+      console.log(modelId);
+
+      const response = await axios.post(
+        `http://localhost:7181/api/jobs/${job.jobId}/model/${modelId}`
+      );
+
+      if (response.status === 400) {
+        console.log("Error adding model");
+        return;
+      }
+
+      setRefreshKey((prev) => prev + 1);
+    }
+  }
 
   return (
     <>
@@ -48,7 +102,14 @@ export default function JobPage() {
 
       <div className="grid grid-cols-3 gap-8">
         <div className="col-span-2 flex flex-col gap-8">
-          {job.models && <ModelList models={job.models} jobId={job.jobId} />}
+          {job.models && (
+            <ModelList
+              models={job.models}
+              jobId={job.jobId}
+              onRemove={handleRemoveModel}
+              onAdd={handleAddModel}
+            />
+          )}
           {!job.models?.length && (
             <p className="italic">No models assigned to this job</p>
           )}

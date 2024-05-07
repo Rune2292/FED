@@ -8,21 +8,28 @@ import AddModelDialogButton from "./AddModelDialogButton";
 interface ModelListProps {
   models: Model[];
   jobId: number;
+  onRemove: (model: Model) => void;
+  onAdd: (modeliD: number) => void;
 }
 
-export default function ModelList({ models, jobId }: ModelListProps) {
+export default function ModelList({
+  models,
+  jobId,
+  onRemove,
+  onAdd,
+}: ModelListProps) {
   return (
     <Card>
       <CardHeader>
         <div className="flex justify-between itmes-center">
           <CardTitle>Models</CardTitle>
-          <AddModelDialogButton jobId={jobId} />
+          <AddModelDialogButton jobId={jobId} onAdded={onAdd} />
         </div>
       </CardHeader>
 
       <CardContent className="grid gap-2">
         {models.map((model, index) => (
-          <ModelListItem key={index} model={model} />
+          <ModelListItem key={index} model={model} onRemove={onRemove} />
         ))}
       </CardContent>
     </Card>

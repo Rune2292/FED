@@ -13,50 +13,34 @@ import { toast } from "./ui/use-toast";
 import { useState } from "react";
 import ModelSelectItem from "./ModelSelectItem";
 import { Model } from "@/types/model";
+import { on } from "events";
+import { EfModel } from "@/types/efModel";
 
 interface AddModelDialogButtonProps {
   jobId: number;
+  onAdded?: (modelId: number) => void;
 }
 
 export default function AddModelDialogButton({
   jobId,
+  onAdded,
 }: AddModelDialogButtonProps) {
   const [open, setOpen] = useState(false);
   const [models, setModels] = useState<Model[]>([]);
-  const [assignedModels, setAssignedModels] = useState<Model[]>([]);
 
   async function handleModels() {
     const responseModels = await axios.get("http://localhost:7181/api/models");
     const responseAssignedModels = await axios.get(
       `http://localhost:7181/api/jobs/${jobId}`
     );
-    console.log("Does this work?");
-    console.log(responseModels.data);
-    console.log(responseAssignedModels.data.models);
-    console.log("stop");
 
     const testing = responseModels.data;
     const testing2 = responseAssignedModels.data.models;
 
-    console.log("1000");
-    console.log(testing);
-    console.log(testing2);
-    console.log("11000");
-
     if (responseModels.status === 200) {
-      setModels(responseModels.data);
-      setAssignedModels(responseAssignedModels.data.models);
-      console.log("Again");
-      console.log(models);
-      console.log(assignedModels);
-      console.log("stopppo");
-      const uniqueModels = models.filter(
-        (model) =>
-          !assignedModels.some(
-            (assignedModel) =>
-              assignedModel.firstName === model.firstName &&
-              assignedModel.lastName === model.lastName
-          )
+      const uniqueModels = testing.filter(
+        (model: Model) =>
+          !testing2.some((m: Model) => m.firstName === model.firstName)
       );
 
       setModels(uniqueModels);
@@ -71,23 +55,25 @@ export default function AddModelDialogButton({
     }
   }
 
-  async function handleModelAdded(modelId: number) {
-    console.log(modelId, jobId);
-    const response = await axios.post(
-      `http://localhost:7181/api/jobs/${jobId}/model/${modelId}`
+  async function handleModelAdded(model: Model) {
+    const responseGetAllModels = await axios.get<EfModel[]>(
+      "http://localhost:7181/api/models"
     );
-    console.log(response);
-    if (response.status === 400) {
-      toast({
-        title: "Error",
-        description: "There was an error creating the model",
-        variant: "default",
-        duration: 5000,
-      });
+    const allModels = responseGetAllModels.data;
+
+    const modelToBeAdded = allModels.find(
+      (m) => m.firstName === model.firstName
+    );
+    if (!modelToBeAdded) {
+      console.log("Model not found");
       return;
     }
-    setOpen(false);
 
+    if (onAdded) {
+      onAdded(modelToBeAdded.efModelId);
+    }
+
+    setOpen(false);
     toast({
       title: "Model added",
       description: "Model has been created successfully added",
@@ -105,7 +91,7 @@ export default function AddModelDialogButton({
       }}
     >
       <DialogTrigger>
-        <Button>Add Models</Button>
+        <Button className="mx-2">Add Models</Button>
       </DialogTrigger>
       <DialogContent className="flex flex-col">
         <div>
@@ -119,12 +105,11 @@ export default function AddModelDialogButton({
             <ModelSelectItem
               key={index}
               selectedModel={model}
-              onClick={() => handleModelAdded(index + 1)}
+              onClick={() => handleModelAdded(model)}
             />
           ))}
         </div>
       </DialogContent>
-      <form></form>
     </Dialog>
   );
 }
