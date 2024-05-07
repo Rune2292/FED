@@ -40,7 +40,7 @@ namespace ModelsApi.Controllers
         public async Task<ActionResult<IEnumerable<Job>>> GetJobs()
         {
             var role = User.Claims.First(a => a.Type == ClaimTypes.Role).Value;
-            
+
             if (role == "Manager")
             {
 #pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.

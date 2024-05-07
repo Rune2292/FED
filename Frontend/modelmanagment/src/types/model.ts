@@ -2,7 +2,7 @@
 
 
 export interface Model{
-    modelId: number;
+    EfModelId: string;
     firstName: string;
     lastName: string;
     email: string;
