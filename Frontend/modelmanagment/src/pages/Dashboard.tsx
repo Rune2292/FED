@@ -1,8 +1,8 @@
 /** @format */
 
 import { Welcome } from "./dashboard/welcome";
-import { ManagerMenu } from "./dashboard/managerMenu";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+//import { ManagerMenu } from "./dashboard/managerMenu";
+//import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Job } from "@/types/job";
@@ -25,25 +25,27 @@ export default function Dashboard() {
 
   return (
     <>
-      <header className="py-8 col-span-4">
-        <div className="flex justify-between items-center">
-          <div>
-            <h1 className="text-6xl font-bold ">Manager dashboard 🤑</h1>
-            <div className="py-2">
-              <Welcome />
+      <div className="flex flex-col sm:mx-12">
+        <header className="py-8 col-span-4">
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-6xl font-bold ">Manager dashboard 🤑</h1>
+              <div className="py-2">
+                <Welcome />
+              </div>
             </div>
+            <Button
+              className="col-span-1"
+              onClick={() => navigate("/create-account")}
+            >
+              Create new account!
+            </Button>
           </div>
-          <Button
-            className="col-span-1"
-            onClick={() => navigate("/create-account")}
-          >
-            Create new account!
-          </Button>
-        </div>
-      </header>
+        </header>
 
-      <div className="col-span-2">
-        <JobList jobs={jobs} onJobClick={handleJobClick} />
+        <div className="col-span-2">
+          <JobList jobs={jobs} onJobClick={handleJobClick} />
+        </div>
       </div>
     </>
   );

@@ -15,6 +15,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 
 type LoginFormInputs = {
   email: string;
@@ -30,6 +31,8 @@ export default function LoginForm() {
   const setToken = useAuthStore((state) => state.setToken);
   const navigate = useNavigate();
 
+  const { toast } = useToast();
+
   const onSubmit = async (data: LoginFormInputs) => {
     try {
       const response = await axios.post(
@@ -41,6 +44,10 @@ export default function LoginForm() {
       navigate("/dashboard");
     } catch (error) {
       console.error("Login error: ", error);
+      toast({
+        title: "Login failed",
+        description: "Something went wrong: " + error,
+      });
     }
   };
 

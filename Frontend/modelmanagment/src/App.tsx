@@ -11,9 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import CreateAccount from "./pages/Account";
 
 import "./api/axiosConfig";
-import "./App.css";
 import { Toaster } from "./components/ui/toaster";
-import { Fragment } from "react/jsx-runtime";
 import JobPage from "./pages/JobPage";
 
 function App() {
