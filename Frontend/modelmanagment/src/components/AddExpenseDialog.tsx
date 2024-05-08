@@ -112,8 +112,9 @@ export default function AddExpenseDialog({
               <p className="text-red-500 text-xs">Amount is required</p>
             )}
           </div>
-          <div className="flex">
+          <div className="space-y-2">
             <Label htmlFor="date">
+              Date & time of expense<span className="text-red-500">*</span>
               <Input
                 id="Date"
                 {...register("date", { required: true })}
