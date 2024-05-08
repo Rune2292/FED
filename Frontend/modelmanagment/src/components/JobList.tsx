@@ -1,7 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Job } from "@/types/job";
 import JobListItem from "./JobListItem";
-import { Button } from "./ui/button";
 import AddJobDialogButton from "./AddJobDialogButton";
 
 interface JobListProps {

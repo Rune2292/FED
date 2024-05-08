@@ -39,7 +39,6 @@ export default function LoginForm() {
         "http://localhost:7181/api/account/login",
         data
       );
-      console.log("Token received: ", response.data.jwt);
       setToken(response.data.jwt);
       const decoded = JSON.parse(atob(response.data.jwt.split(".")[1]));
       const role =

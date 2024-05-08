@@ -1,20 +1,14 @@
 /** @format */
 
-import { Welcome } from "./dashboard/Welcome";
-//import { ManagerMenu } from "./dashboard/managerMenu";
-//import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Welcome } from "./dashboard/welcome";
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { Job } from "@/types/job";
-import { useNavigate } from "react-router-dom";
 import JobList from "@/components/JobList";
-import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/state/authStore";
-import { Dialog } from "@radix-ui/react-dialog";
 import AddExpenseDialog from "@/components/AddExpenseDialog";
 
 export default function ModelDashboard() {
-  const navigate = useNavigate();
   const { modelId } = useAuthStore();
 
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -29,7 +23,6 @@ export default function ModelDashboard() {
   useEffect(() => {
     fetchJobs();
   }, [fetchJobs]);
-  function handleJobClick(job: Job) {}
 
   function handleAddExpense(forJobId: number) {
     setCurrentJobId(forJobId);

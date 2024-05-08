@@ -1,6 +1,6 @@
 /** @format */
 
-import CreateAccount from "./account/CreateAccount";
+import CreateAccount from "./account/createAccount";
 import { BackToManagerDashboard } from "../components/BackToManagerDashboard";
 
 export default function Account() {

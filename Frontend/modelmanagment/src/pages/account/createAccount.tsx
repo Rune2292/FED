@@ -15,7 +15,6 @@ import { Button } from "@/components/ui/button";
 import { Select } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
-import { EfModel } from "@/types/efModel";
 
 type CreateAccountFormInputs = {
   firstName?: string;
@@ -87,7 +86,7 @@ export default function CreateAccount() {
       variant: "default",
       duration: 5000,
     });
-    navigate("/dashboard");
+    navigate("/manager-dashboard");
   };
 
   return (

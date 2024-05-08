@@ -4,20 +4,15 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
 import { Label } from "@radix-ui/react-label";
 import { Input } from "./ui/input";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { parseISO } from "date-fns";
 import { Select } from "./ui/select";
 import { toast } from "./ui/use-toast";
-import { Navigate } from "react-router-dom";
 import { useState } from "react";
-import { on } from "events";
-import { Job } from "@/types/job";
 
 type AddJobFormInputs = {
   Customer: string;
@@ -39,8 +34,6 @@ export default function AddJobDialogButton({
     register,
     handleSubmit,
     formState: { errors },
-    setError,
-    watch,
   } = useForm<AddJobFormInputs>();
 
   const [open, setOpen] = useState(false);

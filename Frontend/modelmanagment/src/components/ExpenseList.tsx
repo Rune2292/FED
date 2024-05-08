@@ -1,7 +1,6 @@
 import { EfExpense } from "@/types/expense";
 import ExpenseListItem from "./ExpenseListItem";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import AddModelDialogButton from "./AddModelDialogButton";
 
 type ExpenseListProps = {
   expenses: EfExpense[];

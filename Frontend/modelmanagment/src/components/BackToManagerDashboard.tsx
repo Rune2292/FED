@@ -3,7 +3,7 @@
 import { useNavigate } from "react-router-dom";
 //import IconReturnUpBackOutline from "@/components/ReturnArrow";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, MoveLeft } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface BackToManagerDashboardProps {

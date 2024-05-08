@@ -1,8 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Model } from "@/types/model";
 import ModelListItem from "./ModelListItem";
-import { Button } from "./ui/button";
-import AddJob from "./AddJobDialogButton";
 import AddModelDialogButton from "./AddModelDialogButton";
 
 interface ModelListProps {

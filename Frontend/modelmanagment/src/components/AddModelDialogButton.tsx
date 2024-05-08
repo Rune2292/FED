@@ -2,18 +2,14 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
 import axios from "axios";
-import { useForm } from "react-hook-form";
 import { toast } from "./ui/use-toast";
 import { useState } from "react";
 import ModelSelectItem from "./ModelSelectItem";
 import { Model } from "@/types/model";
-import { on } from "events";
 import { EfModel } from "@/types/efModel";
 
 interface AddModelDialogButtonProps {

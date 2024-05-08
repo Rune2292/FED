@@ -1,8 +1,6 @@
 /** @format */
 
-import { Welcome } from "./dashboard/Welcome";
-//import { ManagerMenu } from "./dashboard/managerMenu";
-//import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Welcome } from "./dashboard/welcome";
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { Job } from "@/types/job";

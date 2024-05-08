@@ -1,9 +1,6 @@
 /** @format */
 
-import { Welcome } from "./dashboard/Welcome";
-import { ManagerMenu } from "./dashboard/ManagerMenu";
 import ModelList from "@/components/ModelList";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Job } from "@/types/job";
@@ -12,7 +9,6 @@ import { format } from "date-fns";
 import { BackToManagerDashboard } from "../components/BackToManagerDashboard";
 import { Model } from "@/types/model";
 import { EfModel } from "@/types/efModel";
-import ExpenseListItem from "@/components/ExpenseListItem";
 import ExpenseList from "@/components/ExpenseList";
 import { EfExpense } from "@/types/expense";
 import { toast } from "@/components/ui/use-toast";
@@ -51,7 +47,7 @@ export default function JobPage() {
 
   async function handleRemoveModel(model: Model) {
     if (job?.jobId != null) {
-      console.log("TRyiNG TO DELETe");
+      console.log("Attempting to delete model...");
       console.log(model);
 
       const allModels = await axios.get<EfModel[]>(
@@ -91,7 +87,7 @@ export default function JobPage() {
 
   async function handleAddModel(modelId: number) {
     if (job?.jobId != null) {
-      console.log("Trying to add model");
+      console.log("Attempting to add model...");
       console.log(modelId);
 
       const response = await axios.post(
