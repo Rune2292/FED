@@ -1,7 +1,7 @@
 /** @format */
 
-import { Welcome } from "./dashboard/welcome";
-import { ManagerMenu } from "./dashboard/managerMenu";
+import { Welcome } from "./dashboard/Welcome";
+import { ManagerMenu } from "./dashboard/ManagerMenu";
 import ModelList from "@/components/ModelList";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useEffect, useState } from "react";
@@ -9,7 +9,7 @@ import axios from "axios";
 import { Job } from "@/types/job";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
-import { BackToDashboard } from "./account/backToDashboard";
+import { BackToManagerDashboard } from "../components/BackToManagerDashboard";
 import { Model } from "@/types/model";
 import { EfModel } from "@/types/efModel";
 import ExpenseListItem from "@/components/ExpenseListItem";
@@ -107,49 +107,32 @@ export default function JobPage() {
     }
   }
 
+  const jobsExpenses = expenses.filter(
+    (expense) => expense.jobId === job.jobId
+  );
+
   return (
     <>
-      <div className="py-6">
-        <BackToDashboard className="fixed top-10 left-10 m-4 " />
-      </div>
-      <header className="py-8">
+      <header className="p-8">
+        <BackToManagerDashboard />
+
         <h1 className="text-6xl font-bold ">{job.customer}</h1>
         <p className="text-lg pt-4 font-semibold">
           {job.location}, {startDateTime}
         </p>
       </header>
 
-      <div className="grid grid-cols-3 gap-8">
-        <div className="col-span-2 flex flex-col gap-8">
-          {job.models && (
-            <ModelList
-              models={job.models}
-              jobId={job.jobId}
-              onRemove={handleRemoveModel}
-              onAdd={handleAddModel}
-            />
-          )}
-          {!job.models?.length && (
-            <p className="italic">No models assigned to this job</p>
-          )}
-          <Card>
-            <CardHeader className="pt-8 px-8 pt">
-              <CardTitle>Expenses</CardTitle>
-              <ExpenseList expenses={expenses} />
-            </CardHeader>
-            <CardContent className="pt-0"></CardContent>
-          </Card>
+      <div className="flex">
+        <div className="flex-1 px-8">
+          <ModelList
+            models={job.models}
+            jobId={job.jobId}
+            onRemove={handleRemoveModel}
+            onAdd={handleAddModel}
+          />
         </div>
-
-        <div className="col-span-1">
-          <Card>
-            <CardHeader className="pt-8 px-8">
-              <CardTitle>Actions</CardTitle>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <ManagerMenu />
-            </CardContent>
-          </Card>
+        <div className="flex-1 px-8">
+          <ExpenseList expenses={jobsExpenses} />
         </div>
       </div>
     </>

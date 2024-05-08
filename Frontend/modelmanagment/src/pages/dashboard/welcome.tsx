@@ -4,7 +4,7 @@ import React from "react";
 // Decode the JWT to display welcome message!
 
 export const Welcome = () => {
-  const token = useAuthStore((state) => state.getToken());
+  const { token } = useAuthStore();
   const [email, setEmail] = React.useState<string | null>(null);
 
   React.useEffect(() => {

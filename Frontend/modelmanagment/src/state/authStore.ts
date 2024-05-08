@@ -2,8 +2,9 @@ import { create } from 'zustand';
 
 type AuthStoreType = {
   token: string | null;
+  modelId?: number;
   setToken: (token: string | null) => void;
-  getToken: () => string | null;
+  loadToken: () => void;
 };
 
 export const useAuthStore = create<AuthStoreType>((set) => ({
@@ -16,11 +17,23 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
       localStorage.setItem('jwt', token);  // Store token in localStorage
     } else {
       localStorage.removeItem('jwt');
+      return;
+    }
+
+    set(claims(token));
+  },
+  loadToken: () => {
+    const token = localStorage.getItem('jwt'); // Retrieve token from localStorage
+    if (token) {
+      set({ token, ...claims(token) });
     }
   },
-  getToken: () => {
-    const token = localStorage.getItem('jwt'); // Retrieve token from localStorage
-    console.log('Token retrieved:', token); // Log the token
-    return localStorage.getItem('jwt');
-  },
 }));
+
+function claims(token: string) {
+  const decoded = JSON.parse(atob(token.split(".")[1]));
+  const modelId = decoded["ModelId"];
+  return {
+    modelId,
+  }
+}

@@ -41,7 +41,12 @@ export default function LoginForm() {
       );
       console.log("Token received: ", response.data.jwt);
       setToken(response.data.jwt);
-      navigate("/dashboard");
+      const decoded = JSON.parse(atob(response.data.jwt.split(".")[1]));
+      const role =
+        decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+
+      if (role === "Model") navigate("/model-dashboard");
+      else if (role === "Manager") navigate("/manager-dashboard");
     } catch (error) {
       console.error("Login error: ", error);
       toast({

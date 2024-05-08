@@ -28,7 +28,8 @@ export default function AddModelDialogButton({
   const [open, setOpen] = useState(false);
   const [models, setModels] = useState<Model[]>([]);
 
-  async function handleModels() {
+  async function handleAddModelClicked() {
+    setOpen(true);
     const responseModels = await axios.get("http://localhost:7181/api/models");
     const responseAssignedModels = await axios.get(
       `http://localhost:7181/api/jobs/${jobId}`
@@ -83,16 +84,10 @@ export default function AddModelDialogButton({
   }
 
   return (
-    <Dialog
-      open={open}
-      onOpenChange={(isOpen) => {
-        setOpen(isOpen);
-        if (isOpen) handleModels();
-      }}
-    >
-      <DialogTrigger>
-        <Button className="mx-2">Add Models</Button>
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={(isOpen) => setOpen(isOpen)}>
+      <Button className="mx-2" onClick={handleAddModelClicked}>
+        Add Models
+      </Button>
       <DialogContent className="flex flex-col">
         <div>
           <DialogTitle>Add models</DialogTitle>

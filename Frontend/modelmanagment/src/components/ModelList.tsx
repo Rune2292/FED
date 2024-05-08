@@ -6,7 +6,7 @@ import AddJob from "./AddJobDialogButton";
 import AddModelDialogButton from "./AddModelDialogButton";
 
 interface ModelListProps {
-  models: Model[];
+  models: Model[] | undefined;
   jobId: number;
   onRemove: (model: Model) => void;
   onAdd: (modeliD: number) => void;
@@ -28,9 +28,13 @@ export default function ModelList({
       </CardHeader>
 
       <CardContent className="grid gap-2">
-        {models.map((model, index) => (
-          <ModelListItem key={index} model={model} onRemove={onRemove} />
-        ))}
+        {(!models || models.length === 0) && (
+          <div className="text-muted-foreground italic">No models found</div>
+        )}
+        {models &&
+          models.map((model, index) => (
+            <ModelListItem key={index} model={model} onRemove={onRemove} />
+          ))}
       </CardContent>
     </Card>
   );

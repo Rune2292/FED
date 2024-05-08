@@ -1,26 +1,35 @@
 /** @format */
 
-import { Welcome } from "./dashboard/welcome";
+import { Welcome } from "./dashboard/Welcome";
 //import { ManagerMenu } from "./dashboard/managerMenu";
 //import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { Job } from "@/types/job";
 import { useNavigate } from "react-router-dom";
 import JobList from "@/components/JobList";
 import { Button } from "@/components/ui/button";
 
-export default function Dashboard() {
+export default function ManagerDashboard() {
   const navigate = useNavigate();
 
   const [jobs, setJobs] = useState<Job[]>([]);
-  useEffect(() => {
+
+  const fetchJobs = useCallback(() => {
     axios.get("http://localhost:7181/api/jobs/").then((response) => {
       setJobs(response.data);
     });
   }, [setJobs]);
+
+  useEffect(() => {
+    fetchJobs();
+  }, [fetchJobs]);
   function handleJobClick(job: Job) {
     navigate(`/job/${job.jobId}`);
+  }
+
+  function handleAddJob() {
+    fetchJobs();
   }
 
   return (
@@ -44,7 +53,11 @@ export default function Dashboard() {
         </header>
 
         <div className="col-span-2">
-          <JobList jobs={jobs} onJobClick={handleJobClick} />
+          <JobList
+            jobs={jobs}
+            onJobClick={handleJobClick}
+            onAddJob={handleAddJob}
+          />
         </div>
       </div>
     </>

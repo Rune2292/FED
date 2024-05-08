@@ -16,6 +16,8 @@ import { Select } from "./ui/select";
 import { toast } from "./ui/use-toast";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
+import { on } from "events";
+import { Job } from "@/types/job";
 
 type AddJobFormInputs = {
   Customer: string;
@@ -26,7 +28,13 @@ type AddJobFormInputs = {
   Days: number;
 };
 
-export default function AddJobDialogButton() {
+type AddJobDialogButtonProps = {
+  onAddJob: () => void;
+};
+
+export default function AddJobDialogButton({
+  onAddJob,
+}: AddJobDialogButtonProps) {
   const {
     register,
     handleSubmit,
@@ -50,6 +58,8 @@ export default function AddJobDialogButton() {
       });
       return;
     }
+
+    onAddJob();
     setOpen(false);
 
     toast({
@@ -62,9 +72,7 @@ export default function AddJobDialogButton() {
 
   return (
     <Dialog open={open} onOpenChange={(o) => setOpen(o)}>
-      <DialogTrigger>
-        <Button>Add Job</Button>
-      </DialogTrigger>
+      <Button onClick={() => setOpen(true)}>Add Job</Button>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Add Job</DialogTitle>

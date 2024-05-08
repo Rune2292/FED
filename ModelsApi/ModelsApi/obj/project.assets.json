@@ -2463,25 +2463,32 @@
     ]
   },
   "packageFolders": {
-    "/Users/martinvad/.nuget/packages/": {}
+    "C:\\Users\\Runeg\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/martinvad/uni/feu/FED/ModelsApi/ModelsApi/ModelsApi.csproj",
+      "projectUniqueName": "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\FED\\ModelsApi\\ModelsApi\\ModelsApi.csproj",
       "projectName": "ModelsApi",
-      "projectPath": "/Users/martinvad/uni/feu/FED/ModelsApi/ModelsApi/ModelsApi.csproj",
-      "packagesPath": "/Users/martinvad/.nuget/packages/",
-      "outputPath": "/Users/martinvad/uni/feu/FED/ModelsApi/ModelsApi/obj/",
+      "projectPath": "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\FED\\ModelsApi\\ModelsApi\\ModelsApi.csproj",
+      "packagesPath": "C:\\Users\\Runeg\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Runeg\\OneDrive - Aarhus universitet\\4_semester\\FED\\ModelsApi\\ModelsApi\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/martinvad/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Runeg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "/usr/local/share/dotnet/library-packs": {},
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2494,6 +2501,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -2556,20 +2568,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.26, 6.0.26]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.osx-arm64",
-            "version": "[6.0.26, 6.0.26]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.26, 6.0.26]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -2578,7 +2576,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.101/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   },

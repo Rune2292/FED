@@ -1,5 +1,7 @@
 import { EfExpense } from "@/types/expense";
 import ExpenseListItem from "./ExpenseListItem";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import AddModelDialogButton from "./AddModelDialogButton";
 
 type ExpenseListProps = {
   expenses: EfExpense[];
@@ -7,24 +9,25 @@ type ExpenseListProps = {
 
 export default function ExpenseList({ expenses }: ExpenseListProps) {
   return (
-    <div>
-      <h2>Expenses</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Customer</th>
-            <th>Start Date</th>
-            <th>Comments</th>
-            <th>Location</th>
-          </tr>
-        </thead>
-        <tbody>
-          '
+    <Card>
+      <CardHeader>
+        <div className="flex justify-between itmes-center">
+          <CardTitle>Expenses</CardTitle>
+        </div>
+      </CardHeader>
+
+      <CardContent className="grid gap-2">
+        <div className="pt-2">
+          {expenses.length === 0 && (
+            <div className="text-muted-foreground italic">
+              No expenses found
+            </div>
+          )}
           {expenses.map((expense, index) => (
             <ExpenseListItem key={index} expense={expense} />
           ))}
-        </tbody>
-      </table>
-    </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 }
