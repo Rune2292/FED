@@ -12,24 +12,36 @@ import { format } from "date-fns";
 import { BackToDashboard } from "./account/backToDashboard";
 import { Model } from "@/types/model";
 import { EfModel } from "@/types/efModel";
+import ExpenseListItem from "@/components/ExpenseListItem";
+import ExpenseList from "@/components/ExpenseList";
+import { EfExpense } from "@/types/expense";
+import { toast } from "@/components/ui/use-toast";
 
 export default function JobPage() {
   const urlParams = useParams();
 
   const [refreshKey, setRefreshKey] = useState(0);
   const [job, setJob] = useState<Job>();
+  const [expenses, setExpenses] = useState<EfExpense[]>();
   useEffect(() => {
     axios
       .get(`http://localhost:7181/api/jobs/${urlParams.jobId}`)
       .then((response) => {
         setJob(response.data);
       });
-  }, [setJob, urlParams.jobId, refreshKey]);
+    axios.get("http://localhost:7181/api/Expenses").then((response) => {
+      setExpenses(response.data);
+    });
+  }, [setJob, urlParams.jobId, refreshKey, setExpenses]);
 
   if (!job) {
     return <div>Loading...</div>;
   }
 
+  if (!expenses) {
+    console.log("No expenses");
+    return <div>No expenes...</div>;
+  }
   const startDateTime = format(
     new Date(job.startDate),
     "d. MMM yyyy hh:mm aaaa"
@@ -65,6 +77,13 @@ export default function JobPage() {
         console.log("Error deleting model");
         return;
       }
+
+      toast({
+        title: "Model removed",
+        description: "Model has been removed successfully",
+        variant: "default",
+        duration: 5000,
+      });
 
       setRefreshKey((prev) => prev + 1);
     }
@@ -116,6 +135,7 @@ export default function JobPage() {
           <Card>
             <CardHeader className="pt-8 px-8 pt">
               <CardTitle>Expenses</CardTitle>
+              <ExpenseList expenses={expenses} />
             </CardHeader>
             <CardContent className="pt-0"></CardContent>
           </Card>

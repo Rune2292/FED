@@ -1,3 +1,4 @@
+import { EfExpense } from "./expense";
 import { Model } from "./model";
 
 
